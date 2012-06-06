@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>testing language testing</title>
+	<link rel="stylesheet" href="css/bootstrap.css">
+</head>
+<body>
+
+	<select name="setlang" id="setlang">
+		<option value="">Language</option>
+		<option value="en">English</option>
+		<option value="es">Spanish</option>
+	</select>
+	
+
+	<div id="content">
+		
+
+	</div>
+
+	<br>
+
+	<button id="btnCreate">create</button>
+	<button id="btnDelete">delete</button>
+	<button id="btnShow">show</button>
+
+
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="https://raw.github.com/carhartl/jquery-cookie/master/jquery.cookie.js"></script>
+	<script type="text/javascript" src="js/bootstrap.js"></script>
+	<script type="text/javascript">
+		
+		$(function(){
+		
+			var content = $.cookie("lang");
+			$("#content").html(content);
+
+			$("#btnCreate").click(function(){
+				var content = prompt("Create cooke contents", "test");
+				$.cookie("lang", content);
+				console.log("create the cookie");
+			});
+			$("#btnDelete").click(function(){
+				$.cookie("lang", null);
+				console.log("delete the cookie");
+			});
+			$("#btnShow").click(function(){
+				var content = $.cookie("lang");
+				alert(content);
+				console.log(content);
+				$("#content").html(content);
+				console.log("show the cookie");
+			});
+
+			$("#setlang").change(function(){
+				var l = $("#setlang option:selected").val();
+				if(!l) return;
+
+				$.cookie("lang", null);
+				$.cookie("lang", l);
+				setInterval(function(){
+					window.location = document.URL;
+				}, 100);
+
+
+			});
+
+
+		});
+
+	</script>
+</body>
+</html>
